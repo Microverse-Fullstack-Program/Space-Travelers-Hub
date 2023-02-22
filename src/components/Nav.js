@@ -1,12 +1,11 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import palent from '../assets/palent.png';
+import planet1 from '../assets/planet.png';
 
 const Layout = () => {
   const navLinkStyle = ({ isActive }) => {
     const activeLinkStyle = {
       fontWeight: isActive ? 'bold' : 'normal',
-      textDecoration: 'none',
-      color: isActive ? '#a8a8a8' : '#d4d4d4',
+      textDecoration: isActive ? 'underline' : 'none',
     };
     return activeLinkStyle;
   };
@@ -14,27 +13,24 @@ const Layout = () => {
   return (
     <div className="wrapper">
       <header className="header">
-        <div className="nav-wrapper">
-          <div class="logo">
-            <img src={planet} alt="planet" id="planet-icon" />
-            <h2>Space travelers&apos; Hub</h2>
-          </div>
-          <nav className="nav-bar">
-            <NavLink to="/" style={navLinkStyle}>
-              Rockets
-            </NavLink>
-            <NavLink to="/categories" style={navLinkStyle}>
-              Dragons 
-            </NavLink>
-            <NavLink to="/categories" style={navLinkStyle}>
-              Missions
-            </NavLink>
-            <NavLink to="/categories" style={navLinkStyle}>
-              My Profile 
-            </NavLink>
-          </nav>
+        <div className="logo">
+          <img src={planet1} alt="planet" id="planet-icon" />
+          <h2>Space Travelers&apos; Hub</h2>
         </div>
-        <BsPersonFill className="personIcon" />
+        <nav className="nav-bar">
+          <NavLink to="/" className="navLink" style={navLinkStyle}>
+            Rockets
+          </NavLink>
+          <NavLink to="/dragons" className="navLink" style={navLinkStyle}>
+            Dragons
+          </NavLink>
+          <NavLink to="/missions" className="navLink" style={navLinkStyle}>
+            Missions
+          </NavLink>
+          <NavLink to="/profile" className="navLink" style={navLinkStyle}>
+            My Profile
+          </NavLink>
+        </nav>
       </header>
       <main className="container">
         <Outlet />
