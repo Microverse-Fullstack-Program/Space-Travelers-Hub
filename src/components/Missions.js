@@ -1,22 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import MissionsPage from '../pages/MissionsPage';
 import { FetchMissions } from '../redux/missions/missions';
 
 const Missions = () => {
+  const missionsList = useSelector((state) => state.missions);
   const dispatch = useDispatch();
-  const shouldFetchMissions = useRef(true);
-  useEffect(() => {
-    if (shouldFetchMissions.current) {
-      shouldFetchMissions.current = false;
-      dispatch(FetchMissions());
-    }
-  }, [dispatch]);
 
-  let missionList = useSelector((state) => state.missions).missions;
-  if (missionList === null || missionList === undefined) {
-    missionList = [];
-  }
+  useEffect(() => {
+    if (!missionsList.length) dispatch(FetchMissions);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <div className="wrapper">
@@ -30,7 +24,7 @@ const Missions = () => {
           </tr>
         </thead>
         <tbody>
-          {missionList.map((msn) => (
+          {missionsList.map((msn) => (
             <MissionsPage key={msn.id} mission={msn} />
           ))}
         </tbody>
