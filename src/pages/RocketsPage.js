@@ -14,7 +14,7 @@ const RocketsPage = ({ rocket }) => (
         {rocket.description}
         {' '}
       </p>
-      <button type="button" className="reserveBtn">
+      <button type="button" className="reserveRktBtn">
         Reserve Rocket
       </button>
     </div>
