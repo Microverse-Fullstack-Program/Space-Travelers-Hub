@@ -68,7 +68,7 @@ body {
   padding: 0.45rem 1.25rem;
 }
 
-img {
+.rkt-wrapper img {
   width: 25.5rem;
 }
 
@@ -95,7 +95,7 @@ button {
   padding: 10px 20px;
   text-align: center;
   font-size: 1.25rem;
-  background-color:#0290ff;
+  background-color: #0290ff;
   color: #fff;
   border: none;
 }
@@ -106,6 +106,7 @@ button {
   align-items: center;
   border-right: 1px solid #ecebe8;
 }
+
 /*
 .pie-graph {
   height: 70px;
