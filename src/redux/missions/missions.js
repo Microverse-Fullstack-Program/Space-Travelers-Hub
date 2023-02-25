@@ -4,38 +4,58 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 const APIURL = 'https://api.spacexdata.com/v3/missions';
 
 // Actions
-const FETCH_MISSSIONS = 'missions/FETCH_MISSSIONS';
-// const RESERVE_MISSSIONS = 'missions/RESERVE_ISSSIONS';
-// const CANCEL_MISSSIONS = 'missions/CANCEL_ISSSIONS';
+const FETCH_MISSIONS = 'missions/FETCH_MISSIONS';
+const SUBSCRIBE_MISSION = 'missions/SUBSCRIBE_MISSION';
+const UNSUBSCRIBE_MISSIONS = 'missions/UNSUBSCRIBE_MISSION';
 
 // Action creators
-export const FetchMissions = createAsyncThunk(FETCH_MISSSIONS, async () => {
+const FetchMissions = createAsyncThunk(FETCH_MISSIONS, async () => {
   const missionsFetchResult = await fetch(APIURL);
   const missionsData = await missionsFetchResult.json();
   const Missions = [];
-  missionsData.forEach((rocket) => {
+  missionsData.forEach((mission) => {
     Missions.push({
-      id: rocket.id,
-      mission_name: rocket.name,
-      description: rocket.description,
-      flickr_images: rocket.flickr_images[0],
-      active: rocket.active,
+      id: mission.mission_id,
+      mission_name: mission.mission_name,
+      description: mission.description,
+      active: true,
     });
   });
   return Missions;
 });
 
+const SubscribeMission = createAsyncThunk(SUBSCRIBE_MISSION, async (id) => (
+  {
+    payload: id,
+  }
+));
+
+const UnSubscribeMission = createAsyncThunk(UNSUBSCRIBE_MISSIONS, async (id) => (
+  {
+    payload: id,
+  }
+));
+
 // Reducer
-const missionsSlice = createSlice({
-  name: 'missions',
+const MissionsReducer = createSlice({
+  name: 'missions/fetch',
   initialState: [],
-  reducers: {
-    FetchMissions: (state, action) => (
-      {
-        ...state,
-        missions: [...action.payload],
-      }),
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchMissions.fulfilled, (state, action) => (
+        {
+          missions: [...action.payload],
+        }))
+      .addCase(SubscribeMission.fulfilled, ((state, action) => state.map((Mission) => (
+        Mission.id === action.payload ? { ...Mission, active: true } : Mission
+      ))))
+      .addCase(UnSubscribeMission.fulfilled, ((state, action) => state.map((Mission) => (
+        Mission.id === action.payload ? { ...Mission, active: false } : Mission
+      ))))
+      .addDefaultCase((state) => state);
   },
 });
 
-export default missionsSlice.reducer;
+export { FetchMissions, SubscribeMission, UnSubscribeMission };
+export default MissionsReducer.reducer;
