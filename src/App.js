@@ -2,9 +2,9 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
+import Rockets from './components/Rockets';
 import Dragons from './components/Dragons';
 import Missions from './components/Missions';
-import Rockets from './components/Rockets';
 
 function App() {
   return (
