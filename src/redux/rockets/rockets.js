@@ -46,7 +46,6 @@ const rocketsReducer = createSlice({
     builder
       .addCase(FetchRockets.fulfilled, (state, action) => (
         {
-          ...state,
           rockets: [...action.payload],
         }))
       .addCase(ReserveRocket.fulfilled, ((state, action) => state.map((rocket) => (
@@ -55,7 +54,7 @@ const rocketsReducer = createSlice({
       .addCase(UnreserveRocket.fulfilled, ((state, action) => state.map((rocket) => (
         rocket.id === action.payload ? { ...rocket, active: false } : rocket
       ))))
-      .addDefaultCase((state) => [...state]);
+      .addDefaultCase((state) => state);
   },
 });
 

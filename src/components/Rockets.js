@@ -16,9 +16,6 @@ const Rockets = () => {
   let rocketList = useSelector((state) => state.rockets).rockets;
   if (rocketList === null || rocketList === undefined) {
     rocketList = [];
-  } else {
-    // eslint-disable-next-line no-console
-    console.log(rocketList);
   }
 
   return (
