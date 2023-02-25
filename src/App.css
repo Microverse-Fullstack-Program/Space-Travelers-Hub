@@ -62,32 +62,38 @@ body {
   color: #0290ff;
 }
 
-.rkt-wrapper {
+.rkt-wrapper,
+.drg-wrapper {
   display: flex;
   gap: 25px;
   padding: 0.45rem 1.25rem;
 }
 
-.rkt-wrapper img {
+.rkt-wrapper img,
+.drg-wrapper img {
   width: 25.5rem;
 }
 
-.rkt-detail {
+.rkt-detail,
+.drg-detail {
   display: flex;
   flex-direction: column;
   gap: 25px;
   padding: 0.45rem 1.25rem;
 }
 
-.rkt-title {
+.rkt-title,
+.drg-title {
   font-weight: bold;
   font-size: 1.45rem;
 }
 
-.rkt-desc {
+.rkt-desc,
+.drg-desc {
   font-weight: normal;
   font-size: 1.35rem;
   line-height: 2.15rem;
+  text-align: justify;
 }
 
 button {
@@ -98,13 +104,6 @@ button {
   background-color: #0290ff;
   color: #fff;
   border: none;
-}
-
-.bk-status {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-right: 1px solid #ecebe8;
 }
 
 /*
