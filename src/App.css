@@ -96,6 +96,12 @@ body {
   text-align: justify;
 }
 
+.reserve-badge {
+  color: #074e84;
+  font-weight: bold;
+  font-size: 1.65rem;
+  line-height: 2.15rem;
+}
 button {
   width: max-content;
   padding: 10px 20px;

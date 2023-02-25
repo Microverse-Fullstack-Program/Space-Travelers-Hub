@@ -44,10 +44,8 @@ const rocketsReducer = (state = [], action) => {
     case FETCH_ROCKETS:
       return action.payload;
     case RESERVE_ROCKET:
-      console.log(action.payload); // eslint-disable-line
       newState = state.map((rocket) => {
         if (rocket.id === action.payload) {
-          console.log(rocket); // eslint-disable-line
           return { ...rocket, reserve: true };
         }
         return rocket;
@@ -56,7 +54,6 @@ const rocketsReducer = (state = [], action) => {
     case UNRESERVE_ROCKET:
       newState = state.map((rocket) => {
         if (rocket.id === action.payload) {
-          console.log(rocket); // eslint-disable-line 
           return { ...rocket, reserve: false };
         }
         return rocket;
