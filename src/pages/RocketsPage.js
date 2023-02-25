@@ -21,7 +21,7 @@ const RocketsPage = ({ rocket }) => {
           {' '}
           {rocket.rocket_name}
           {' '}
-          <span className="reserve-badge">{(rocket.reserve ? '(Reserved)' : '')}</span>
+          <span className="reserved">{(rocket.reserve ? '(Reserved)' : '')}</span>
         </h2>
         <p className="rkt-desc">
           {' '}
@@ -30,14 +30,14 @@ const RocketsPage = ({ rocket }) => {
         </p>
         <button
           type="button"
-          className={`rocket-btn ${rocket.reserve ? 'hide' : ''}`}
+          className={`${rocket.reserve ? 'hide' : ''}`}
           onClick={() => handleReserve(rocket.id)}
         >
           Reserve Rocket
         </button>
         <button
           type="button"
-          className={`rocket-btn close ${rocket.reserve ? '' : 'hide'}`}
+          className={`${rocket.reserve ? '' : 'hide'}`}
           onClick={() => handleCancel(rocket.id)}
         >
           Cancel Rocket

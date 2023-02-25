@@ -26,7 +26,7 @@ const DragonsPage = ({ dragon }) => {
           )
         </h2>
         <p>
-          <span className="reserve-badge">{(dragon.reserve ? '(Reserved)' : '')}</span>
+          <span className="reserved">{(dragon.reserve ? '(Reserved)' : '')}</span>
         </p>
         <p className="drg-desc">
           {' '}
@@ -35,14 +35,14 @@ const DragonsPage = ({ dragon }) => {
         </p>
         <button
           type="button"
-          className={`rocket-btn ${dragon.reserve ? 'hide' : ''}`}
+          className={`${dragon.reserve ? 'hide' : ''}`}
           onClick={() => handleReserve(dragon.id)}
         >
           Reserve Dragon
         </button>
         <button
           type="button"
-          className={`rocket-btn close ${dragon.reserve ? '' : 'hide'}`}
+          className={`${dragon.reserve ? '' : 'hide'}`}
           onClick={() => handleCancel(dragon.id)}
         >
           Cancel Dragon
