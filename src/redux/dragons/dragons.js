@@ -1,41 +1,60 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// API URL
-const APIURL = 'https://api.spacexdata.com/v4/dragons';
-
 // Actions
 const FETCH_DRAGONS = 'dragons/FETCH_DRAGONS';
-// const RESERVE_DRAGONS = 'dragons/RESERVE_DRAGONS';
-// const CANCEL_DRAGONS = 'dragons/CANCEL_DRAGONS';
+const RESERVE_DRAGON = 'dragons/RESERVE_DRAGON';
+const UNRESERVE_DRAGON = 'dragons/UNRESERVE_DRAGON';
 
 // Action creators
-export const FetchDragons = createAsyncThunk(FETCH_DRAGONS, async () => {
-  const dragonsFetchResult = await fetch(APIURL);
+const FetchDragons = createAsyncThunk(FETCH_DRAGONS, async () => {
+  const dragonsFetchResult = await fetch('https://api.spacexdata.com/v4/dragons');
   const dragonsData = await dragonsFetchResult.json();
   const Dragons = [];
   dragonsData.forEach((dragon) => {
     Dragons.push({
       id: dragon.id,
-      dragons_name: dragon.name,
+      dragon_name: dragon.name,
+      type: dragon.type,
       description: dragon.description,
-      flickr_images: dragon.flickr_images[0],
+      image: dragon.flickr_images[0],
       active: dragon.active,
     });
   });
   return Dragons;
 });
 
+const Reservedragon = createAsyncThunk(RESERVE_DRAGON, async (id) => (
+  {
+    payload: id,
+  }
+));
+
+const Unreservedragon = createAsyncThunk(UNRESERVE_DRAGON, async (id) => (
+  {
+    payload: id,
+  }
+));
+
 // Reducer
-const dragonsSlice = createSlice({
-  name: 'dragons',
+const dragonsReducer = createSlice({
+  name: 'dragons/fetch',
   initialState: [],
-  reducers: {
-    FetchDragons: (state, action) => (
-      {
-        ...state,
-        dragons: [...action.payload],
-      }),
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(FetchDragons.fulfilled, (state, action) => (
+        {
+          dragons: [...action.payload],
+        }))
+      .addCase(Reservedragon.fulfilled, ((state, action) => state.map((dragon) => (
+        dragon.id === action.payload ? { ...dragon, active: true } : dragon
+      ))))
+      .addCase(Unreservedragon.fulfilled, ((state, action) => state.map((dragon) => (
+        dragon.id === action.payload ? { ...dragon, active: false } : dragon
+      ))))
+      .addDefaultCase((state) => state);
   },
 });
 
-export default dragonsSlice.reducer;
+export { FetchDragons, Reservedragon, Unreservedragon };
+export default dragonsReducer.reducer;
