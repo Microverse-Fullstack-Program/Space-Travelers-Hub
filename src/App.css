@@ -17,7 +17,7 @@ body {
 
 .wrapper {
   width: 100%;
-  height: max-content;
+  height: auto;
   margin: auto;
   padding: 5px;
   box-shadow: 0 10px 17px -5px #f5f0f0;
@@ -63,71 +63,41 @@ body {
   letter-spacing: 0.45px;
   color: #0290ff;
 }
-/* 
-.book-wrapper {
-  display: grid;
-  grid-template-columns: 3.5fr 1.5fr 2fr;
-  width: auto;
-  height: auto;
-  margin: 1.25rem 6rem;
-  padding: 1.5rem 1.25rem 1.5rem 2.5rem;
-  border-radius: 4px;
-  border: solid 1px #e8e8e8;
-  background-color: #fff;
+
+.rkt-wrapper {
+  display: flex;
+  gap: 25px;
+  padding: 0.45rem 1.25rem;
 }
 
-.book {
+img {
+  width: 25.5rem;
+}
+
+.rkt-detail {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  padding: 0.45rem 1.25rem;
 }
 
-.book-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.rkt-title {
+  font-weight: bold;
+  font-size: 1.45rem;
 }
 
-.bk-genre {
-  opacity: 0.5;
-  font-size: 1.175rem;
-  font-family: Montserrat, sans-serif;
-  color: #121212;
+.rkt-desc {
+  font-weight: normal;
+  font-size: 1.35rem;
+  line-height: 2.15rem;
 }
 
-.bk-author {
-  color: #a5cece;
-  font-weight: 300;
-  font-size: 1.175rem;
-  fill-opacity: 0.5;
-}
-
-.bk-title {
-  color: #121212;
-  font-size: 1.75rem;
-  font-family: RobotoSlab, sans-serif;
-}
-
-.bookBtn {
-  display: flex;
-  gap: 15px;
+.button {
   width: 5rem;
   height: 2rem;
-}
-
-.bookBtn button {
   font-size: 1.175rem;
-  background-color: #fff;
-  color: #a5cece73;
-}
-
-.bookBtn :nth-child(2) {
-  border-left: 1px solid #ecebe8;
-  border-right: 1px solid #ecebe8;
-  padding: 0 0.85rem;
-}
-
-.book-wrapper button {
+  background-color:#0290ff;
+  color: #fff;
   border: none;
 }
 
@@ -137,7 +107,7 @@ body {
   align-items: center;
   border-right: 1px solid #ecebe8;
 }
-
+/*
 .pie-graph {
   height: 70px;
   width: 70px;

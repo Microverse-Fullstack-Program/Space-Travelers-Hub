@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
 
 const RocketsPage = ({ rocket }) => (
-  <div className="roockets-detail">
-    <img className="rocket-img" src={rocket.image} alt="rocket" />
-    <p className="rocket-title">
-      {' '}
-      {rocket.rocket_name}
-      {' '}
-    </p>
-    <h2 className="rocket-desc">
-      {' '}
-      {rocket.description}
-      {' '}
-    </h2>
-  </div>
+  <>
+    <img src={rocket.image} alt="rocket" />
+    <div className="rkt-detail">
+      <h2 className="rkt-title">
+        {' '}
+        {rocket.rocket_name}
+        {' '}
+      </h2>
+      <p className="rkt-desc">
+        {' '}
+        {rocket.description}
+        {' '}
+      </p>
+      <button type="button" className="reserveBtn">
+        Reserve Rocket
+      </button>
+    </div>
+  </>
 );
 
 RocketsPage.propTypes = {

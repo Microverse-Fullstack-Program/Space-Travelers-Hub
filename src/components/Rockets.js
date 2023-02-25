@@ -22,13 +22,13 @@ const Rockets = () => {
   }
 
   return (
-    <>
+    <div className="wrapper">
       {rocketList.map((rkt) => (
-        <div key={rkt.id}>
+        <div key={rkt.id} className="rkt-wrapper">
           <RocketsPage rocket={rkt} />
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
