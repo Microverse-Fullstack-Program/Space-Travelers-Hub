@@ -18,6 +18,7 @@ const FetchDragons = async (dispatch) => {
         type: dragon.type,
         description: dragon.description,
         image: dragon.flickr_images[0],
+        wikipedia: dragon.wikipedia,
         reserve: dragon.active,
       });
     });

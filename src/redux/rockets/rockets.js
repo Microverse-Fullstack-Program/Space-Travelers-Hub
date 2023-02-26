@@ -17,6 +17,7 @@ const FetchRockets = async (dispatch) => {
         rocket_name: rocket.name,
         description: rocket.description,
         image: rocket.flickr_images[0],
+        wikipedia: rocket.wikipedia,
         reserve: rocket.active,
       });
     });

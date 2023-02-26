@@ -16,6 +16,7 @@ const FetchMissions = async (dispatch) => {
         id: mission.mission_id,
         mission_name: mission.mission_name,
         description: mission.description,
+        wikipedia: mission.wikipedia,
         reserve: true,
       });
     });
