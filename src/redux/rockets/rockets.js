@@ -1,5 +1,3 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 // API URL
 const APIURL = 'https://api.spacexdata.com/v4/rockets';
 
@@ -9,54 +7,63 @@ const RESERVE_ROCKET = 'rockets/RESERVE_ROCKET';
 const UNRESERVE_ROCKET = 'rockets/UNRESERVE_ROCKET';
 
 // Action creators
-const FetchRockets = createAsyncThunk(FETCH_ROCKETS, async () => {
-  const rocketsFetchResult = await fetch(APIURL);
-  const rocketsData = await rocketsFetchResult.json();
-  const Rockets = [];
-  rocketsData.forEach((rocket) => {
-    Rockets.push({
-      id: rocket.id,
-      rocket_name: rocket.name,
-      description: rocket.description,
-      image: rocket.flickr_images[0],
-      active: rocket.active,
+const FetchRockets = async (dispatch) => {
+  try {
+    const response = await fetch(APIURL).then((res) => res.json());
+    const RocketsData = [];
+    response.forEach((rocket) => {
+      RocketsData.push({
+        id: rocket.id,
+        rocket_name: rocket.name,
+        description: rocket.description,
+        image: rocket.flickr_images[0],
+        wikipedia: rocket.wikipedia,
+        reserve: rocket.active,
+      });
     });
-  });
-  return Rockets;
+    dispatch({ type: FETCH_ROCKETS, payload: RocketsData });
+  } catch (error) {
+    console.log(error); // eslint-disable-line 
+  }
+  return [];
+};
+
+const ReserveRocket = (id) => ({
+  type: RESERVE_ROCKET,
+  payload: id,
 });
 
-const ReserveRocket = createAsyncThunk(RESERVE_ROCKET, async (id) => (
-  {
-    payload: id,
-  }
-));
-
-const UnreserveRocket = createAsyncThunk(UNRESERVE_ROCKET, async (id) => (
-  {
-    payload: id,
-  }
-));
+const UnreserveRocket = (id) => ({
+  type: UNRESERVE_ROCKET,
+  payload: id,
+});
 
 // Reducer
-const rocketsReducer = createSlice({
-  name: 'rockets/fetch',
-  initialState: [],
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(FetchRockets.fulfilled, (state, action) => (
-        {
-          rockets: [...action.payload],
-        }))
-      .addCase(ReserveRocket.fulfilled, ((state, action) => state.map((rocket) => (
-        rocket.id === action.payload ? { ...rocket, active: true } : rocket
-      ))))
-      .addCase(UnreserveRocket.fulfilled, ((state, action) => state.map((rocket) => (
-        rocket.id === action.payload ? { ...rocket, active: false } : rocket
-      ))))
-      .addDefaultCase((state) => state);
-  },
-});
+const rocketsReducer = (state = [], action) => {
+  let newState;
+  switch (action.type) {
+    case FETCH_ROCKETS:
+      return action.payload;
+    case RESERVE_ROCKET:
+      newState = state.map((rocket) => {
+        if (rocket.id === action.payload) {
+          return { ...rocket, reserve: true };
+        }
+        return rocket;
+      });
+      return newState;
+    case UNRESERVE_ROCKET:
+      newState = state.map((rocket) => {
+        if (rocket.id === action.payload) {
+          return { ...rocket, reserve: false };
+        }
+        return rocket;
+      });
+      return newState;
+    default:
+      return state;
+  }
+};
 
 export { FetchRockets, ReserveRocket, UnreserveRocket };
-export default rocketsReducer.reducer;
+export default rocketsReducer;

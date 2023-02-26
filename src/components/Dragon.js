@@ -1,22 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import DragonsPage from '../pages/DragonsPage';
 import { FetchDragons } from '../redux/dragons/dragons';
 
 const Dragons = () => {
+  const dragonsList = useSelector((state) => state.dragons);
   const dispatch = useDispatch();
-  const shouldFetchDragons = useRef(true);
-  useEffect(() => {
-    if (shouldFetchDragons.current) {
-      shouldFetchDragons.current = false;
-      dispatch(FetchDragons());
-    }
-  }, [dispatch]);
 
-  let dragonsList = useSelector((state) => state.dragons).dragons;
-  if (dragonsList === null || dragonsList === undefined) {
-    dragonsList = [];
-  }
+  useEffect(() => {
+    if (!dragonsList.length) dispatch(FetchDragons);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <div className="wrapper">
