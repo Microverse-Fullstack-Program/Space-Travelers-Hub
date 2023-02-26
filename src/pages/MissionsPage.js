@@ -15,7 +15,7 @@ const MissionsPage = ({ mission }) => {
 
   return (
     <tr>
-      <td>
+      <td className="title">
         {' '}
         {mission.mission_name}
         {' '}
@@ -26,17 +26,15 @@ const MissionsPage = ({ mission }) => {
         {' '}
       </td>
       <td className="status">
-        <div>
-          {(mission.reserve ? 'Active Member' : 'Not A Member')}
-        </div>
+        {(mission.reserve ? <p className="active">Active Member</p> : <p className="inactive">Not A Member</p>)}
       </td>
       <td>
         {(mission.reserve ? (
-          <button type="button" onClick={() => handleLeaving(mission.id)}>
+          <button type="button" className="leave" onClick={() => handleLeaving(mission.id)}>
             Leave Mission
           </button>
         ) : (
-          <button type="button" onClick={() => handleJoining(mission.id)}>
+          <button type="button" className="join" onClick={() => handleJoining(mission.id)}>
             Join mission
           </button>
         ))}
