@@ -102,6 +102,7 @@ body {
   font-size: 1.65rem;
   line-height: 2.15rem;
 }
+
 button {
   width: max-content;
   padding: 10px 20px;
@@ -140,7 +141,7 @@ td.status {
 
 .status .active,
 .status .inactive {
-  background-color:#0290ff;
+  background-color: #0290ff;
   color: #fff;
   border: 2px solid rgb(237, 228, 228);
   border-radius: 15px;
@@ -148,19 +149,12 @@ td.status {
 }
 
 .status .active {
-  background-color:#0290ff;
+  background-color: #0290ff;
 }
 
 .status .inactive {
-  background-color:#4e4f50;
+  background-color: #4e4f50;
   text-transform: uppercase;
-}
-
-.status .join,
-.status .leave {
-  border: 2px solid rgb(237, 228, 228);
-  border-radius: 15px;
-  padding: 10px;
 }
 
 .join {
@@ -172,9 +166,16 @@ td.status {
 
 .leave {
   background: none;
-  color: #ff0000;
-  border: 1px solid #ff0000;
+  color: #f00;
+  border: 1px solid #f00;
   border-radius: 5px;
+}
+
+.status .join,
+.status .leave {
+  border: 2px solid rgb(237, 228, 228);
+  border-radius: 15px;
+  padding: 10px;
 }
 
 .hide {
@@ -237,5 +238,5 @@ li {
 
 a:hover {
   text-decoration: underline;
-  color: #ffff00;
+  color: #ff0;
 }
